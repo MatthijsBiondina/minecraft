@@ -1,0 +1,17 @@
+black==25.1.0
+click==8.1.8
+cyclonedds @ git+https://github.com/eclipse-cyclonedds/cyclonedds-python@4335997e4ab251166411b0803b540d247591f8af
+markdown-it-py==3.0.0
+mdurl==0.1.2
+MouseInfo==0.1.3
+mypy-extensions==1.0.0
+numpy==2.2.5
+packaging==25.0
+pathspec==0.12.1
+platformdirs==4.3.7
+PyAutoGUI==0.9.54
+Pygments==2.19.1
+rich==14.0.0
+rich-click==1.8.8
+screeninfo==0.8.1
+typing_extensions==4.13.2

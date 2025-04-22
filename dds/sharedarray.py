@@ -3,7 +3,7 @@ import os
 import uuid
 
 
-class MemmapBase:
+class SharedArray:
     """Base class for both Writer and Reader to handle shared memory-mapped arrays."""
 
     def __init__(
@@ -62,3 +62,45 @@ class MemmapBase:
     def __exit__(self, *args, **kwargs):
         """Exit the context manager."""
         self.close()
+
+    def write(self, data, idx=None):
+        """
+        Write data to a memory-mapped array.
+
+        Parameters:
+        -----------
+        data: np.ndarray
+            Data to write to the array.
+        indices: tuple or list of tuples, optional
+            Indices to write data to. If None, write to the entire array.
+        """
+        if idx is None:
+            # Write to the entire array
+            self.array[:] = data
+        else:
+            # Write to specific indices
+            self.array[idx] = data
+
+        # Flush to ensure data is written to disk
+        self.array.flush()
+
+    def read(self, idx=None):
+        """
+        Read data from the memory-mapped array.
+
+        Parameters:
+        -----------
+        indices: tuple or list of tuples, optional
+            Indices to read from. If None, read from the entire array.
+
+        Returns:
+        --------
+        data: np.ndarray
+            Data read from the array.
+        """
+        if idx is None:
+            # Read the entire array
+            return np.copy(self.array)
+        else:
+            # Read specific indices
+            return np.copy(self.array[idx])
